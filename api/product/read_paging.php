@@ -40,7 +40,6 @@ if ($num > 0) {
         $clients_item = array(
             "client_id" => $client_id,
             "balance" => $balance,
-            "balance" => $balance,
             "limit" => $limit,
             "status" => $status,
             "type" => $type
