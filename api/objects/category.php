@@ -2,7 +2,7 @@
 
 class Clients_info
 {
-    // соединение с БД и таблицей "categories"
+    // соединение с БД и таблицей "clients_info"
     private $conn;
     private $table_name = "clients_info";
 

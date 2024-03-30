@@ -24,7 +24,7 @@ $clients->client_id = isset($_GET["client_id"]) ? $_GET["client_id"] : die();
 // получим детали товара
 $clients->readOne();
 
-if ($clients->name != null) {
+if ($clients->client_id != null) {
 
     // создание массива
     $clients_arr = array(
