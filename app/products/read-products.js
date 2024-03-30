@@ -32,4 +32,3 @@ function showProducts(json_url = "http://rest-api/api/product/read_paging.php") 
         // Изменим заголовок страницы
         changePageTitle("Все товары");
     });
-}
