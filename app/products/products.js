@@ -67,6 +67,29 @@ function readProductsTemplate(data, keywords) {
 
     // Конец таблицы
     read_products_html += `</table>`;
+    // Если есть пагинация
+if (data.paging) {
+    read_products_html += `<ul class="pagination pull-left margin-zero padding-bottom-2em">`;
+
+    // Первая страница
+    if (data.paging.first != "") {
+        read_products_html += `<li><a data-page="${data.paging.first}">Первая страница</a></li>`;
+    }
+
+    // Перебор страниц
+    $.each(data.paging.pages, (key, val) => {
+        const active_page = val.current_page == "yes" ? "class='active'" : "";
+
+        read_products_html += `<li ${active_page}><a data-page="${val.url}">${val.page}</a></li>`;
+    });
+
+    // Последняя страница
+    if (data.paging.last != "") {
+        read_products_html += `<li><a data-page="${data.paging.last}">Последняя страница</a></li>`;
+    }
+
+    read_products_html += "</ul>";
+}
 
     // Добавим в «page-content» нашего приложения
     $("#page-content").html(read_products_html);
