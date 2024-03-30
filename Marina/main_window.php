@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +19,7 @@
     <main>
     <div class="wrapper">
         <h2>Добавление клиента</h2>
-        <form id="addClientForm">
+        <form id="addClientForm" action="send_bd.php" method="POST">
             <input type="text" id="clientOrganisation" name="clientOrganisation" placeholder="Название организации">
 
             <input type="text" id="clientName" name="clientName" placeholder="Имя клиента">
@@ -29,13 +30,13 @@
 
             <input type="tel" id="clientTelephon" name="clientTelephon" placeholder="Номер телефона">
 
-            <input type="email" id="clientEmail" name="Email" placeholder="Email">
+            <input type="email" id="clientEmail" name="clientEmail" placeholder="Email">
 
             <input type="date" id="clientDateOfBirth" name="clientDateOfBirth" placeholder="Дата рождения">
 
             <input type="text" id="clientAddress" name="clientAddress" placeholder="Адрес подключения">
 
-            <button type="submit">Добавить клиента</button>
+            <button type="submit" class="submit">Добавить клиента</button>
         </form>
         
         <h2>Изменение информации о клиенте</h2>
@@ -117,8 +118,8 @@
         </form>
         
         <h2>Удаление клиента</h2>
-        <form id="deleteClientForm">
-            <input type="text" id="deleteClientId" name="deleteClientId" placeholder="ID клиента для удаления">
+        <form id="deleteClientForm" action="delete.php" method="POST">
+            <input type="text" id="clientEmail" name="clientEmail" placeholder="Email клиента для удаления">
             <button type="submit">Удалить клиента</button>
         </form>
         
@@ -176,17 +177,35 @@
         </form>
         
         <h2>Получение информации о текущем статусе клиента</h2>
-        <form id="getClientStatusForm">
+        <form id="getClientStatusForm" action="receive_inf.php">
             <input type="text" id="statusClientId" name="statusClientId" placeholder="ID клиента">
             <button type="submit">Получить статус клиента</button>
-            <p><textarea id="infoClientStatus" name="newInfo" readonly></textarea></p>
+            <body onload="getClientStatus()">
+                <p><textarea id="infoClientStatus" name="newInfo" readonly></textarea></p>
+            </body>
+            <script>
+                // Функция для отправки AJAX запроса и обновления информации о клиенте
+                function getClientStatus() {
+                    var xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState == 4 && xhr.status == 200) {
+                            document.getElementById("infoClientStatus").value = xhr.responseText;
+                        }
+                    };
+                    xhr.open("GET", "get_client_status.php", true);
+                    xhr.send();
+                }
+
+                // Вызываем функцию при загрузке страницы
+                getClientStatus();
+            </script>
         </form>
         
         <h2>Получение информации о балансе клиента</h2>
         <form id="getClientBalanceForm">
             <input type="text" id="balanceClientId" name="balanceClientId" placeholder="ID клиента">
             <button type="submit">Получить баланс клиента</button>
-            <p><textarea id="infoClientBalance" name="newInfo" readonly></textarea></p>
+            <p><textarea id="infoClientBalance" name="infoClientBalance" readonly></textarea></p>
         </form>
         
         <h2>Автоматическое списание денежных средств</h2>
