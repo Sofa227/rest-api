@@ -1,73 +1,34 @@
-jQuery(($) => {
+jQuery($ => {
 
     // Показать список товаров при первой загрузке
     showProducts();
-});
 
-// При нажатии кнопки
-$(document).on("click", ".read-products-button", () => {
-    showProducts();
-});
-
-// Функция для показа списка товаров
-function showProducts() {
-
-    // Получить список товаров из API
-    $.getJSON("http://rest-api/api/product/read.php", data => {
-    
-        // HTML для списка товаров
-        let read_products_html = `
-
-        <!-- При нажатии загружается форма создания товара -->
-        <div id="create-product" class="btn btn-primary pull-right m-b-15px create-product-button">
-            <span class="glyphicon glyphicon-plus"></span> Создание товара
-        </div>
-
-        <!-- Таблица товаров -->
-        <table class="table table-bordered table-hover">
-
-            <!-- Создание заголовков таблицы -->
-            <tr>
-                <th class="w-15-pct">Название</th>
-                <th class="w-10-pct">Цена</th>
-                <th class="w-15-pct">Категория</th>
-                <th class="w-25-pct text-align-center">Действие</th>
-            </tr>`;
-
-            // Перебор списка возвращаемых данных
-            $.each(data.records, function (key, val) {
-
-                // Создание новой строки таблицы для каждой записи
-                read_products_html += `
-                    <tr>
-                        <td>` + val.name + `</td>
-                        <td>` + val.price + `</td>
-                        <td>` + val.category_name + `</td>
-
-                        <!-- Кнопки "действий" -->
-                        <td>
-                            <!-- Кнопка чтения товара -->
-                            <button class="btn btn-primary m-r-10px read-one-product-button" data-id="` + val.id + `">
-                                <span class="glyphicon glyphicon-eye-open"></span> Просмотр
-                            </button>
-                            <!-- Кнопка редактирования -->
-                            <button class="btn btn-info m-r-10px update-product-button" data-id="` + val.id + `">
-                                <span class="glyphicon glyphicon-edit"></span> Редактирование
-                            </button>
-                            <!-- Кнопка удаления товара -->
-                            <button class="btn btn-danger delete-product-button" data-id="` + val.id + `">
-                                <span class="glyphicon glyphicon-remove"></span> Удаление
-                            </button>
-                        </td>
-                    </tr>`;
-            });
-
-        read_products_html += `</table>`;
-        // Вставка в "page-content" нашего приложения
-        $("#page-content").html(read_products_html);
-        // Изменяем заголовок страницы
-        changePageTitle("Все товары");
-
+    // Когда была нажата кнопка «Все товары»
+    $(document).on("click", ".read-products-button", function () {
+        showProducts();
     });
 
-}
+    // Когда была нажата кнопка пагинации
+    $(document).on("click", ".pagination li", function () {
+
+        // Получаем JSON URL
+        const json_url = $(this).find("a").attr("data-page");
+
+        // Покажем список товаров с пагинацией
+        showProducts(json_url);
+    });
+
+});
+
+// Функция для отображения списка товаров
+function showProducts(json_url = "http://rest-api/api/product/read_paging.php") {
+
+    // Получаем список товаров из API
+    $.getJSON(json_url, function (data) {
+
+        // HTML для перечисления товаров
+        readProductsTemplate(data, "");
+
+        // Изменим заголовок страницы
+        changePageTitle("Все товары");
+    });
