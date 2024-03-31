@@ -1,3 +1,4 @@
+<?php include 'get_inf.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -117,9 +118,9 @@
         </form>
         
         <h2>Удаление клиента</h2>
-        <form id="deleteClientForm">
-            <input type="text" id="deleteClientId" name="deleteClientId" placeholder="ID клиента для удаления">
-            <button type="submit" name="delete_button">Удалить клиента</button>
+        <form id="deleteClientForm" action="delete.php" method="POST">
+            <input type="text" id="clientEmail" name="clientEmail" placeholder="Email клиента для удаления">
+            <button type="submit">Удалить клиента</button>
         </form>
         
         <h2>Управление платежами и расходами</h2>
@@ -176,17 +177,48 @@
         </form>
         
         <h2>Получение информации о текущем статусе клиента</h2>
-        <form id="getClientStatusForm">
-            <input type="text" id="statusClientId" name="statusClientId" placeholder="ID клиента">
+        <form id="getClientStatusForm" action="receive_inf.php" onsubmit="return getClientInfo()">
+            <input type="text" id="id" name="id" placeholder="ID клиента">
             <button type="submit">Получить статус клиента</button>
             <p><textarea id="infoClientStatus" name="newInfo" readonly></textarea></p>
         </form>
+
+        <script>
+        function getClientInfo() {
+            // Получаем ID клиента из поля ввода
+            var id = document.getElementById("id").value;
+
+            // Создаем объект XMLHttpRequest для выполнения запроса к серверу
+            var xhr = new XMLHttpRequest();
+
+            // Устанавливаем обработчик события загрузки
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    // Если запрос выполнен успешно, обновляем содержимое textarea
+                    document.getElementById("infoClientStatus").value = xhr.responseText;
+                } else {
+                    // Если возникла ошибка, выводим сообщение об ошибке
+                    alert('Request failed. Status: ' + xhr.status);
+                }
+            };
+
+            // Формируем URL для запроса к серверу, добавляем параметр id
+            var url = 'get_inf.php?id=' + encodeURIComponent(id);
+
+            // Открываем соединение и отправляем запрос к серверу
+            xhr.open('GET', url, true);
+            xhr.send();
+
+            // Возвращаем false, чтобы предотвратить отправку формы
+            return false;
+        }
+        </script>
         
         <h2>Получение информации о балансе клиента</h2>
         <form id="getClientBalanceForm">
             <input type="text" id="balanceClientId" name="balanceClientId" placeholder="ID клиента">
             <button type="submit">Получить баланс клиента</button>
-            <p><textarea id="infoClientBalance" name="newInfo" readonly></textarea></p>
+            <p><textarea id="infoClientBalance" name="infoClientBalance" readonly></textarea></p>
         </form>
         
         <h2>Автоматическое списание денежных средств</h2>

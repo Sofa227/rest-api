@@ -34,9 +34,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
-
-    $query = "UPDATE clients SET balance = ?, correction = ?, limit = ?, status = ?, type = ?, next_payment = ?, expenses = ?, service_with_periodic_payments = ? WHERE client_id = ?";
-
 }
 
 $conn->close();
