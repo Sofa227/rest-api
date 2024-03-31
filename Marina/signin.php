@@ -4,7 +4,7 @@ include 'config.php';
 
 $signin_login = $_POST['signin_login'];
 $signin_password = $_POST['signin_password'];
-$sql = "SELECT login from emloyee_logins WHERE login=\"{$signin_login}\" AND password=\"{$signin_password}\"";
+$sql = "SELECT login from employee_logins WHERE login=\"{$signin_login}\" AND password=\"{$signin_password}\"";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 
@@ -17,5 +17,5 @@ else {
     echo "Пользователь не найден";
 }
 
-$conn->close();
+
 ?>
