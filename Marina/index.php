@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +9,8 @@
 
 </head>
 <body>
+<div class="cd-user-modal">
+	<div class="cd-user-modal-container">
     <div id="cd-login">
         <form class="cd-form"  action="signin.php" method="POST">
             <p class="fieldset">
@@ -23,7 +26,10 @@
                 <input class="full-width" type="submit" value="Войти">
             </p>
         </form>
+</div>
+</div>
     </div> 
     <script src="main.js"></script>
 </body>
 </html>
+
