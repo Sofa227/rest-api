@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,4 +27,3 @@
     <script src="main.js"></script>
 </body>
 </html>
-

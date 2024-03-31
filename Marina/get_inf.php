@@ -17,14 +17,14 @@ try {
     die("Ошибка подключения к базе данных: " . $e->getMessage());
 }
 
-// Получение значения ID клиента из GET-параметра
-$id = isset($_GET['id']) ? $_GET['id'] : null;
+// Получение значения email клиента из GET-параметра
+$email = isset($_GET['email']) ? $_GET['email'] : null;
 
-if ($id !== null) {
-    // Запрос к базе данных для получения информации о клиенте
-    $query = "SELECT * FROM clients WHERE id = :id"; // Замените 'your_table_name' на имя вашей таблицы
+if ($email !== null) {
+    // Запрос к базе данных для получения информации о клиенте по email
+    $query = "SELECT * FROM clients WHERE email = :email";
     $stmt = $pdo->prepare($query);
-    $stmt->bindParam(':id', $id);
+    $stmt->bindParam(':email', $email);
     $stmt->execute();
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -32,23 +32,14 @@ if ($id !== null) {
     if ($row) {
         // Формирование информации для вывода
         $info = "";
-        $info .= "Email: " . sanitize_output($row["email"]) . "\n";
-        $info .= "Balance: " . sanitize_output($row["balance"]) . "\n";
-        $info .= "Correct: " . sanitize_output($row["correct"]) . "\n";
-        $info .= "Limits: " . sanitize_output($row["limits"]) . "\n";
         $info .= "N_status: " . sanitize_output($row["n_status"]) . "\n";
-        $info .= "N_type: " . sanitize_output($row["n_type"]) . "\n";
-        $info .= "N_p_type: " . sanitize_output($row["n_p_type"]) . "\n";
-        $info .= "Expense: " . sanitize_output($row["expense"]) . "\n";
-        $info .= "N_service: " . sanitize_output($row["n_service"]) . "\n\n";
-
-
 
         // Отправляем данные клиенту в формате текста
         echo $info;
     } else {
-        // Клиент с таким ID не найден
-        echo "Клиент с таким ID не найден";
+        // Клиент с таким email не найден
+        echo "Клиент с таким email не найден";
     }
 }
+
 ?>
