@@ -10,7 +10,7 @@
     <header class="background_color">
         <div class="wrapper" id="header_div">
             <nav class="exit-nav">
-                <li><a class="cd-exit" id="cd-exit-id">Выход</a></li>
+                <li><a class="cd-exit" id="cd-exit-id" href="exit.php" >Выход</a></li>
             </nav>
         </div>
     </header>
@@ -18,7 +18,7 @@
     <main>
     <div class="wrapper">
         <h2>Добавление клиента</h2>
-        <form id="addClientForm">
+        <form id="addClientForm" action="send_bd.php" method="POST">
             <input type="text" id="clientOrganisation" name="clientOrganisation" placeholder="Название организации">
 
             <input type="text" id="clientName" name="clientName" placeholder="Имя клиента">
@@ -29,13 +29,13 @@
 
             <input type="tel" id="clientTelephon" name="clientTelephon" placeholder="Номер телефона">
 
-            <input type="email" id="clientEmail" name="Email" placeholder="Email">
+            <input type="email" id="clientEmail" name="clientEmail" placeholder="Email">
 
             <input type="date" id="clientDateOfBirth" name="clientDateOfBirth" placeholder="Дата рождения">
 
             <input type="text" id="clientAddress" name="clientAddress" placeholder="Адрес подключения">
 
-            <button type="submit">Добавить клиента</button>
+            <button type="submit" class="submit">Добавить клиента</button>
         </form>
         
         <h2>Изменение информации о клиенте</h2>
@@ -113,13 +113,13 @@
                 </select>
             </p>
 
-            <button type="submit">Изменить информацию</button>
+            <button type="submit">Добавить информацию</button>
         </form>
         
         <h2>Удаление клиента</h2>
         <form id="deleteClientForm">
             <input type="text" id="deleteClientId" name="deleteClientId" placeholder="ID клиента для удаления">
-            <button type="submit">Удалить клиента</button>
+            <button type="submit" name="delete_button">Удалить клиента</button>
         </form>
         
         <h2>Управление платежами и расходами</h2>
@@ -163,11 +163,17 @@
             </p>
         </form>
         
-        <!-- <h2>Корректировка баланса счета клиента</h2>
+        <h2>Корректировка баланса счета клиента</h2>
         <form id="adjustBalanceForm">
             <input type="text" id="clientIdBalance" name="clientIdBalance" placeholder="ID клиента">
+            <input type="number" id="addCorrection" name="addCorrection" placeholder="Сумма корректировки">
+            <select name="clientCorrectionNew" id="clientCorrectionNew" >
+                    <option value="clientCorrectionNew0">-- Корректировка --</option>
+                    <option value="clientCorrectionNew1">Увеличение баланса</option>
+                    <option value="clientCorrectionNew2">Уменьшение баланса</option>
+            </select>
             <button type="submit">Корректировать баланс</button>
-        </form> -->
+        </form>
         
         <h2>Получение информации о текущем статусе клиента</h2>
         <form id="getClientStatusForm">

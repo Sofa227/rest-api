@@ -9,13 +9,14 @@
 </head>
 <body>
     <div id="cd-login">
-        <form class="cd-form">
+        <form class="cd-form"  action="signin.php" method="POST">
             <p class="fieldset">
-                <input class="full-width has-padding has-border" id="signin-email" type="text" placeholder="Логин">
+                <input class="full-width has-padding has-border" id="signin-email" type="text" placeholder="Логин" name="signin_login">
             </p>
     
             <p class="fieldset">
-                <input class="full-width has-padding has-border" id="signin-password" type="text"  placeholder="Пароль">
+                <input class="full-width has-padding has-border" id="signin-password" type="text" placeholder="Пароль" name="signin_password">
+                <a href="#0" class="hide-password">Скрыть</a>
             </p>
     
             <p class="fieldset">
