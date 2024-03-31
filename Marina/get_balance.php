@@ -17,14 +17,15 @@ try {
     die("Ошибка подключения к базе данных: " . $e->getMessage());
 }
 
-// Получение значения ID клиента из GET-параметра
-$id = isset($_GET['id']) ? $_GET['id'] : null;
+// Получение значения email клиента из GET-параметра
+// Получение значения email клиента из GET-параметра
+$email = isset($_GET['email']) ? $_GET['email'] : null;
 
-if ($id !== null) {
-    // Запрос к базе данных для получения информации о клиенте
-    $query = "SELECT * FROM clients WHERE id = :id"; // Замените 'your_table_name' на имя вашей таблицы
+if ($email !== null) {
+    // Запрос к базе данных для получения информации о клиенте по email
+    $query = "SELECT * FROM clients WHERE email = :email";
     $stmt = $pdo->prepare($query);
-    $stmt->bindParam(':id', $id);
+    $stmt->bindParam(':email', $email);
     $stmt->execute();
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -34,14 +35,12 @@ if ($id !== null) {
         $info = "";
         $info .= "Balance: " . sanitize_output($row["balance"]) . "\n";
 
-
-
-
         // Отправляем данные клиенту в формате текста
         echo $info;
     } else {
-        // Клиент с таким ID не найден
-        echo "Клиент с таким ID не найден";
+        // Клиент с таким email не найден
+        echo "Клиент с таким email не найден";
     }
 }
+
 ?>
