@@ -215,11 +215,42 @@
         </script>
         
         <h2>Получение информации о балансе клиента</h2>
-        <form id="getClientBalanceForm">
+        <form id="getClientBalanceForm" onsubmit="return getClientBalance()">
             <input type="text" id="balanceClientId" name="balanceClientId" placeholder="ID клиента">
             <button type="submit">Получить баланс клиента</button>
             <p><textarea id="infoClientBalance" name="infoClientBalance" readonly></textarea></p>
         </form>
+
+        <script>
+        function getClientBalance() {
+            // Получаем ID клиента из поля ввода
+            var id = document.getElementById("balanceClientId").value;
+
+            // Создаем объект XMLHttpRequest для выполнения запроса к серверу
+            var xhr = new XMLHttpRequest();
+
+            // Устанавливаем обработчик события загрузки
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    // Если запрос выполнен успешно, обновляем содержимое textarea
+                    document.getElementById("infoClientBalance").value = xhr.responseText;
+                } else {
+                    // Если возникла ошибка, выводим сообщение об ошибке
+                    alert('Request failed. Status: ' + xhr.status);
+                }
+            };
+
+            // Формируем URL для запроса к серверу, добавляем параметр id
+            var url = 'get_balance.php?id=' + encodeURIComponent(id);
+
+            // Открываем соединение и отправляем запрос к серверу
+            xhr.open('GET', url, true);
+            xhr.send();
+
+            // Возвращаем false, чтобы предотвратить отправку формы
+            return false;
+        }
+        </script>
         
         <h2>Автоматическое списание денежных средств</h2>
         <form id="autoDebitForm">

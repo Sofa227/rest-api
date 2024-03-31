@@ -32,15 +32,8 @@ if ($id !== null) {
     if ($row) {
         // Формирование информации для вывода
         $info = "";
-        // $info .= "Email: " . sanitize_output($row["email"]) . "\n";
-        // $info .= "Balance: " . sanitize_output($row["balance"]) . "\n";
-        // $info .= "Correct: " . sanitize_output($row["correct"]) . "\n";
-        // $info .= "Limits: " . sanitize_output($row["limits"]) . "\n";
-        $info .= "N_status: " . sanitize_output($row["n_status"]) . "\n";
-        // $info .= "N_type: " . sanitize_output($row["n_type"]) . "\n";
-        // $info .= "N_p_type: " . sanitize_output($row["n_p_type"]) . "\n";
-        // $info .= "Expense: " . sanitize_output($row["expense"]) . "\n";
-        // $info .= "N_service: " . sanitize_output($row["n_service"]) . "\n\n";
+        $info .= "Balance: " . sanitize_output($row["balance"]) . "\n";
+
 
 
 
