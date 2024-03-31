@@ -102,45 +102,11 @@ header, footer {
     font-size: 16px;
     font-size: 1rem;
   }
-  .cd-user-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(52, 54, 66, 0.9);
-    visibility: hidden;
-  }
-  .cd-user-modal.is-visible {
-    visibility: visible;
-  }
   .cd-user-modal-container {
     position: relative;
     width: 90%;
     max-width: 600px;
-    margin: 3em auto 4em;
-  }
-  .cd-user-modal-container .cd-switcher:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-  .cd-user-modal-container .cd-switcher li {
-    width: 50%;
-    float: left;
-    text-align: center;
-  }
-  .cd-user-modal-container .cd-switcher a {
-    display: block;
-    width: 100%;
-    height: 50px;
-    line-height: 50px;
-    background: #d2d8d8;
-    color: #809191;
-  }
-  .cd-user-modal-container .cd-switcher a.selected {
-    background: #FFF;
-    color: #505260;
+    margin: 4em auto;
   }
   .cd-form {
     padding: 1.4em;
@@ -153,6 +119,9 @@ header, footer {
     margin: 0;
     padding: 0;
     border-radius: 0.25em;
+    border: 1px solid #d2d8d8;
+    width: 100%;
+    padding: 12px 20px 12px 50px;
   }
   .cd-form input.full-width {
     width: 100%;
@@ -216,7 +185,7 @@ header, footer {
     color: #343642;
   }
 
-  .cd-form .hide-password {
+/*   .cd-form .hide-password {
     display: inline-block;
     position: absolute;
     right: 0;
@@ -225,7 +194,8 @@ header, footer {
     border-left: 1px solid #d2d8d8;
     font-size: 14px;
     color: #343642;
-  }
-  #cd-login {
-    width: 70;
-  }
+  } */
+
+#cd-login {
+  border: 0.1em solid;
+}
