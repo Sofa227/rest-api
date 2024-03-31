@@ -1,3 +1,4 @@
+<?php include 'get_inf.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,8 +19,8 @@
     <main>
     <div class="wrapper">
         <h2>Добавление клиента</h2>
-        <form id="addClientForm">
-            <input type="text" id="clientOrganisation" name="clientOrganisation" placeholder="Название организации">
+        <form id="addClientForm" action="send_bd.php" method="POST">
+            <p><input type="text" id="clientOrganisation" name="clientOrganisation" placeholder="Название организации"></p>
 
             <input type="text" id="clientName" name="clientName" placeholder="Имя клиента">
 
@@ -27,89 +28,88 @@
 
             <input type="text" id="clientPatronymic" name="clientPatronymic" placeholder="Отчество клиента">
 
-            <input type="tel" id="clientTelephon" name="clientTelephon" placeholder="Номер телефона">
+            <p><input type="tel" id="clientTelephon" name="clientTelephon" placeholder="Номер телефона">
 
-            <input type="email" id="clientEmail" name="Email" placeholder="Email">
+            <input type="email" id="clientEmail" name="clientEmail" placeholder="Email">
 
-            <input type="date" id="clientDateOfBirth" name="clientDateOfBirth" placeholder="Дата рождения">
+            <input type="date" id="clientDateOfBirth" name="clientDateOfBirth" placeholder="Дата рождения"></p>
 
-            <input type="text" id="clientAddress" name="clientAddress" placeholder="Адрес подключения">
+            <p><input type="text" id="clientAddress" name="clientAddress" placeholder="Адрес подключения"></p>
 
-            <button type="submit">Добавить клиента</button>
+            <p><button type="submit" class="submit">Добавить клиента</button></p>
         </form>
         
         <h2>Изменение информации о клиенте</h2>
-        <form id="updateClientForm">
-            <input type="text" id="clientId" name="clientId" placeholder="ID клиента">
+        <form id="updateClientForm" action="change-add.php" method="POST">
+            <input type="text" id="clientEmail" name="clientEmail" placeholder="Email клиента">
 
             <p>
-                <select name="clientBalance" id="clientBalance" >
-                    <option value="clientBalance0">-- Баланс --</option>
-                    <option value="clientBalance1">Положительный баланс</option>
-                    <option value="clientBalance2">Отрицательный баланс</option>
+                <select name="clientBalance" id="clientBalance">
+                    <option value="">-- Баланс --</option>
+                    <option value="Положительный баланс">Положительный баланс</option>
+                    <option value="Отрицательный баланс">Отрицательный баланс</option>
                 </select>
             </p>
 
             <p>
-                <select name="clientCorrection" id="clientCorrection" >
-                    <option value="clientCorrection0">-- Корректировка --</option>
-                    <option value="clientCorrection1">Увеличение баланса</option>
-                    <option value="clientCorrection2">Уменьшение баланса</option>
+                <select name="clientCorrection" id="clientCorrection">
+                    <option value="">-- Корректировка --</option>
+                    <option value="Увеличение баланса">Увеличение баланса</option>
+                    <option value="Уменьшение баланса">Уменьшение баланса</option>
                 </select>
             </p>
-            
+
             <p>
                 <input type="number" id="clientLimit" name="clientLimit" placeholder="Лимит">
-            </p> 
+            </p>
 
             <p>
-                <select name="clientStatus" id="clientStatus" >
-                    <option value="clientStatus0">-- Статус --</option>
-                    <option value="clientStatus1">Подключение</option>
-                    <option value="clientStatus2">Активен</option>
-                    <option value="clientStatus3">Блокировка</option>
-                    <option value="clientStatus4">Расторгнут</option>
+                <select name="clientStatus" id="clientStatus">
+                    <option value="">-- Статус --</option>
+                    <option value="Подключение">Подключение</option>
+                    <option value="Активен">Активен</option>
+                    <option value="Блокировка">Блокировка</option>
+                    <option value="Расторгнут">Расторгнут</option>
                 </select>
             </p>
 
             <p>
-                <select name="clientType" id="clientType" >
-                    <option value="clientType0">-- Тип --</option>
-                    <option value="clientType1">Физическое лицо</option>
-                    <option value="clientType2">Юридическое лицо</option>
+                <select name="clientType" id="clientType">
+                    <option value="">-- Тип --</option>
+                    <option value="Физическое лицо">Физическое лицо</option>
+                    <option value="Юридическое лицо">Юридическое лицо</option>
                 </select>
             </p>
 
             <p>
-                <select name="clientPayment" id="clientPayment" >
-                    <option value="clientPayment0">-- Поступивший платеж --</option>
-                    <option value="clientPayment1">QR-код</option>
-                    <option value="clientPayment2">Автоплатеж</option>ъъ
-                    <option value="clientPayment3">Банковский платеж</option>
-                    <option value="clientPayment4">Наличный платеж</option>
-                    <option value="clientPayment5">Оплата картой</option>
-                    <option value="clientPayment6">Платеж «Почта России»</option>
-                    <option value="clientPayment7">Сбер-онлайн</option>
-                    <option value="clientPayment8">СБП</option>
+                <select name="clientPayment" id="clientPayment">
+                    <option value="">-- Поступивший платеж --</option>
+                    <option value="QR-код">QR-код</option>
+                    <option value="Автоплатеж">Автоплатеж</option>
+                    <option value="Банковский платеж">Банковский платеж</option>
+                    <option value="Наличный платеж">Наличный платеж</option>
+                    <option value="Оплата картой">Оплата картой</option>
+                    <option value="Платеж «Почта России»">Платеж «Почта России»</option>
+                    <option value="Сбер-онлайн">Сбер-онлайн</option>
+                    <option value="СБП">СБП</option>
                 </select>
             </p>
 
-            
             <p>
                 <input type="number" id="clientOutgoes" name="clientOutgoes" placeholder="Расходы денежных средств">
-            </p> 
+            </p>
 
             <p>
-                <select name="clientService" id="clientPayment" >
-                    <option value="clientService0">-- Услуги с периодом списания денежных средств --</option>
-                    <option value="clientService1">Услуга – Видеонаблюдение</option>
-                    <option value="clientService2">Услуга – Домофония</option>ъъ
-                    <option value="clientService3">Услуга – Интернет</option>
-                    <option value="clientService4">Услуга – Оборудование</option>
-                    <option value="clientService5">Услуга – Подписка на программное обеспечение</option>
-                    <option value="clientService6">Услуга – Телевидение</option>
-                    <option value="clientService7">Услуга – Телефонная связь</option>
-                    <option value="clientService8">Услуга – Хостинг веб-ресурсов</option>
+                <select name="clientService" id="clientService">
+                    <option value="">-- Услуги с периодом списания денежных средств --</option>
+                    <option value="Видеонаблюдение">Услуга – Видеонаблюдение</option>
+                    <option value="Домофония">Услуга – Домофония</option>
+                    <option value="Интернет">Услуга – Интернет</option>
+                    <option value="Оборудование">Услуга – Оборудование</option>
+                    <option value="Подписка на программное обеспечение">Услуга – Подписка на программное обеспечение</option>
+                    <option value="Телевидение">Услуга – Телевидение</option>
+                    <option value="Телефонная связь">Услуга – Телефонная связь</option>
+                    <option value="Хостинг веб-ресурсов">Услуга – Хостинг веб-ресурсов</option>
                 </select>
             </p>
 
@@ -117,9 +117,9 @@
         </form>
         
         <h2>Удаление клиента</h2>
-        <form id="deleteClientForm">
-            <input type="text" id="deleteClientId" name="deleteClientId" placeholder="ID клиента для удаления">
-            <button type="submit">Удалить клиента</button>
+        <form id="deleteClientForm" action="delete.php" method="POST">
+            <input type="text" id="clientEmail" name="clientEmail" placeholder="Email клиента для удаления">
+            <p><button type="submit">Удалить клиента</button></p>
         </form>
         
         <h2>Управление платежами и расходами</h2>
@@ -127,8 +127,7 @@
             <input type="text" id="clientIdPayment" name="clientIdPayment" placeholder="ID клиента">
             <p>
                 <button type="submit">Удалить последний платеж</button>
-            </p>
-            <p>
+            
                 <button type="submit">Удалить последний расход</button>
             </p>
             <p>
@@ -144,7 +143,7 @@
                     <option value="clientPaymentNew8">СБП</option>
                 </select>
                 <input type="number" id="addIngo" name="addIngo" placeholder="Сумма платежа">
-                <button type="submit">Добавить платеж</button>
+                <p><button type="submit">Добавить платеж</button></p>
             </p>
             <p>
                 <select name="clientServiceNew" id="clientPaymentNew" >
@@ -159,40 +158,102 @@
                     <option value="clientServiceNew8">Услуга – Хостинг веб-ресурсов</option>
                 </select>
                 <input type="number" id="addOutgo" name="addOutgo" placeholder="Сумма расхода">
-                <button type="submit">Добавить расход</button>
+                <p><button type="submit">Добавить расход</button></p>
             </p>
         </form>
         
         <h2>Корректировка баланса счета клиента</h2>
         <form id="adjustBalanceForm">
             <input type="text" id="clientIdBalance" name="clientIdBalance" placeholder="ID клиента">
-            <input type="number" id="addCorrection" name="addCorrection" placeholder="Сумма корректировки">
+            <p><input type="number" id="addCorrection" name="addCorrection" placeholder="Сумма корректировки">
             <select name="clientCorrectionNew" id="clientCorrectionNew" >
                     <option value="clientCorrectionNew0">-- Корректировка --</option>
                     <option value="clientCorrectionNew1">Увеличение баланса</option>
                     <option value="clientCorrectionNew2">Уменьшение баланса</option>
-            </select>
-            <button type="submit">Корректировать баланс</button>
+            </select></p>
+            <p><button type="submit">Корректировать баланс</button></p>
         </form>
         
         <h2>Получение информации о текущем статусе клиента</h2>
-        <form id="getClientStatusForm">
-            <input type="text" id="statusClientId" name="statusClientId" placeholder="ID клиента">
-            <button type="submit">Получить статус клиента</button>
+        <form id="getClientStatusForm" action="receive_inf.php" onsubmit="return getClientInfo()">
+            <input type="text" id="id" name="id" placeholder="ID клиента">
+            <p><button type="submit">Получить статус клиента</button></p>
             <p><textarea id="infoClientStatus" name="newInfo" readonly></textarea></p>
         </form>
+
+        <script>
+        function getClientInfo() {
+            // Получаем ID клиента из поля ввода
+            var id = document.getElementById("id").value;
+
+            // Создаем объект XMLHttpRequest для выполнения запроса к серверу
+            var xhr = new XMLHttpRequest();
+
+            // Устанавливаем обработчик события загрузки
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    // Если запрос выполнен успешно, обновляем содержимое textarea
+                    document.getElementById("infoClientStatus").value = xhr.responseText;
+                } else {
+                    // Если возникла ошибка, выводим сообщение об ошибке
+                    alert('Request failed. Status: ' + xhr.status);
+                }
+            };
+
+            // Формируем URL для запроса к серверу, добавляем параметр id
+            var url = 'get_inf.php?id=' + encodeURIComponent(id);
+
+            // Открываем соединение и отправляем запрос к серверу
+            xhr.open('GET', url, true);
+            xhr.send();
+
+            // Возвращаем false, чтобы предотвратить отправку формы
+            return false;
+        }
+        </script>
         
         <h2>Получение информации о балансе клиента</h2>
-        <form id="getClientBalanceForm">
+        <form id="getClientBalanceForm" onsubmit="return getClientBalance()">
             <input type="text" id="balanceClientId" name="balanceClientId" placeholder="ID клиента">
-            <button type="submit">Получить баланс клиента</button>
-            <p><textarea id="infoClientBalance" name="newInfo" readonly></textarea></p>
+            <p><button type="submit">Получить баланс клиента</button></p>
+            <p><textarea id="infoClientBalance" name="infoClientBalance" readonly></textarea></p>
         </form>
+
+        <script>
+        function getClientBalance() {
+            // Получаем ID клиента из поля ввода
+            var id = document.getElementById("balanceClientId").value;
+
+            // Создаем объект XMLHttpRequest для выполнения запроса к серверу
+            var xhr = new XMLHttpRequest();
+
+            // Устанавливаем обработчик события загрузки
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    // Если запрос выполнен успешно, обновляем содержимое textarea
+                    document.getElementById("infoClientBalance").value = xhr.responseText;
+                } else {
+                    // Если возникла ошибка, выводим сообщение об ошибке
+                    alert('Request failed. Status: ' + xhr.status);
+                }
+            };
+
+            // Формируем URL для запроса к серверу, добавляем параметр id
+            var url = 'get_balance.php?id=' + encodeURIComponent(id);
+
+            // Открываем соединение и отправляем запрос к серверу
+            xhr.open('GET', url, true);
+            xhr.send();
+
+            // Возвращаем false, чтобы предотвратить отправку формы
+            return false;
+        }
+        </script>
         
         <h2>Автоматическое списание денежных средств</h2>
         <form id="autoDebitForm">
             <input type="text" id="autoDebitClientId" name="autoDebitClientId" placeholder="ID клиента">
-            <button type="submit">Списать деньги по расписанию</button>
+            <p><button type="submit">Списать деньги по расписанию</button></p>
         </form> 
     </div>
     </main>
