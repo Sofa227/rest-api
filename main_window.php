@@ -148,7 +148,7 @@
                 <button type="submit" name = "addPayment">Добавить платеж</button>
             </p>
             <p>
-                <select name="clientServiceNew" id="clientPaymentNew" >
+                <select name="clientServiceNew" id="clientServiceNew" >
                     <option value="clientServiceNew0">-- Услуги с периодом списания денежных средств --</option>
                     <option value="clientServiceNew1">Услуга – Видеонаблюдение</option>
                     <option value="clientServiceNew2">Услуга – Домофония</option>ъъ
