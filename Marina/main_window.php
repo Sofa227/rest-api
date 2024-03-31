@@ -178,15 +178,16 @@
         
         <h2>Получение информации о текущем статусе клиента</h2>
         <form id="getClientStatusForm" action="receive_inf.php" onsubmit="return getClientInfo()">
-            <input type="text" id="id" name="id" placeholder="ID клиента">
+            <input type="email" id="email" name="email" placeholder="Email клиента">
             <button type="submit">Получить статус клиента</button>
             <p><textarea id="infoClientStatus" name="newInfo" readonly></textarea></p>
         </form>
 
+
         <script>
         function getClientInfo() {
-            // Получаем ID клиента из поля ввода
-            var id = document.getElementById("id").value;
+            // Получаем email клиента из поля ввода
+            var email = document.getElementById("email").value;
 
             // Создаем объект XMLHttpRequest для выполнения запроса к серверу
             var xhr = new XMLHttpRequest();
@@ -202,8 +203,8 @@
                 }
             };
 
-            // Формируем URL для запроса к серверу, добавляем параметр id
-            var url = 'get_inf.php?id=' + encodeURIComponent(id);
+            // Формируем URL для запроса к серверу, добавляем параметр email
+            var url = 'get_inf.php?email=' + encodeURIComponent(email);
 
             // Открываем соединение и отправляем запрос к серверу
             xhr.open('GET', url, true);
@@ -212,14 +213,48 @@
             // Возвращаем false, чтобы предотвратить отправку формы
             return false;
         }
+
         </script>
         
         <h2>Получение информации о балансе клиента</h2>
-        <form id="getClientBalanceForm">
-            <input type="text" id="balanceClientId" name="balanceClientId" placeholder="ID клиента">
+        <form id="getClientBalanceForm" onsubmit="return getClientBalance()">
+            <input type="email" id="balanceClientEmail" name="balanceClientEmail" placeholder="Email клиента">
             <button type="submit">Получить баланс клиента</button>
             <p><textarea id="infoClientBalance" name="infoClientBalance" readonly></textarea></p>
         </form>
+
+
+        <script>
+        function getClientBalance() {
+            // Получаем email клиента из поля ввода
+            var email = document.getElementById("balanceClientEmail").value;
+
+            // Создаем объект XMLHttpRequest для выполнения запроса к серверу
+            var xhr = new XMLHttpRequest();
+
+            // Устанавливаем обработчик события загрузки
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    // Если запрос выполнен успешно, обновляем содержимое textarea
+                    document.getElementById("infoClientBalance").value = xhr.responseText;
+                } else {
+                    // Если возникла ошибка, выводим сообщение об ошибке
+                    alert('Request failed. Status: ' + xhr.status);
+                }
+            };
+
+            // Формируем URL для запроса к серверу, добавляем параметр email
+            var url = 'get_balance.php?email=' + encodeURIComponent(email);
+
+            // Открываем соединение и отправляем запрос к серверу
+            xhr.open('GET', url, true);
+            xhr.send();
+
+            // Возвращаем false, чтобы предотвратить отправку формы
+            return false;
+        }
+
+        </script>
         
         <h2>Автоматическое списание денежных средств</h2>
         <form id="autoDebitForm">
