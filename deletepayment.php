@@ -8,31 +8,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['deletePayment'])) {
         // Удаление последнего платежа
         $sql_delete_payment = "DELETE FROM clients WHERE email = '$email' ORDER BY id DESC LIMIT 1";
-        mysqli_query($connection, $sql_delete_payment);
+        mysqli_query($conn, $sql_delete_payment);
     }
     
     if (isset($_POST['deleteExpense'])) {
         // Удаление последнего расхода
         $sql_delete_expense = "DELETE FROM clients WHERE email = '$email' ORDER BY id DESC LIMIT 1";
-        mysqli_query($connection, $sql_delete_expense);
+        mysqli_query($conn, $sql_delete_expense);
     }
     
     if (isset($_POST['addPayment'])) {
         $paymentType = $_POST['clientPaymentNew'];
-        $amount = $_POST['addIngo'];
+        $balance = $_POST['addIngo'];
         
         // Добавление платежа
-        $sql_add_payment = "INSERT INTO clients (email, n_p_type, amount) VALUES ('$email', '$paymentType', '$amount')";
-        mysqli_query($connection, $sql_add_payment);
+        $sql_add_payment = "INSERT INTO clients (email, n_p_type, balance) VALUES ('$email', '$paymentType', '$balance')";
+        mysqli_query($conn, $sql_add_payment);
     }
     
     if (isset($_POST['addExpense'])) {
         $serviceType = $_POST['clientServiceNew'];
-        $amount = $_POST['addOutgo'];
+        $expense = $_POST['addOutgo'];
         
         // Добавление расхода
-        $sql_add_expense = "INSERT INTO clients (email, n_service, amount) VALUES ('$email', '$serviceType', '$amount')";
-        mysqli_query($connection, $sql_add_expense);
+        $sql_add_expense = "INSERT INTO clients (email, n_service, expense) VALUES ('$email', '$serviceType', '$expense')";
+        mysqli_query($conn, $sql_add_expense);
     }
 }
 ?>
