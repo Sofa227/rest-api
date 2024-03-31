@@ -124,13 +124,13 @@
         </form>
         
         <h2>Управление платежами и расходами</h2>
-        <form id="managePaymentsForm" action="deletepayment.php">
+        <form id="managePaymentsForm">
             <input type="text" id="clientIdPayment" name="clientIdPayment" placeholder="ID клиента">
             <p>
-                <button type="submit" name ="deletePayment">Удалить последний платеж</button>
+                <button type="submit">Удалить последний платеж</button>
             </p>
             <p>
-                <button type="submit" name = "deleteExpense">Удалить последний расход</button>
+                <button type="submit">Удалить последний расход</button>
             </p>
             <p>
                 <select name="clientPaymentNew" id="clientPaymentNew" >
@@ -145,10 +145,10 @@
                     <option value="clientPaymentNew8">СБП</option>
                 </select>
                 <input type="number" id="addIngo" name="addIngo" placeholder="Сумма платежа">
-                <button type="submit" name = "addPayment">Добавить платеж</button>
+                <button type="submit">Добавить платеж</button>
             </p>
             <p>
-                <select name="clientServiceNew" id="clientServiceNew" >
+                <select name="clientServiceNew" id="clientPaymentNew" >
                     <option value="clientServiceNew0">-- Услуги с периодом списания денежных средств --</option>
                     <option value="clientServiceNew1">Услуга – Видеонаблюдение</option>
                     <option value="clientServiceNew2">Услуга – Домофония</option>ъъ
@@ -160,7 +160,7 @@
                     <option value="clientServiceNew8">Услуга – Хостинг веб-ресурсов</option>
                 </select>
                 <input type="number" id="addOutgo" name="addOutgo" placeholder="Сумма расхода">
-                <button type="submit" name ="addExpense">Добавить расход</button>
+                <button type="submit">Добавить расход</button>
             </p>
         </form>
         
@@ -178,15 +178,16 @@
         
         <h2>Получение информации о текущем статусе клиента</h2>
         <form id="getClientStatusForm" action="receive_inf.php" onsubmit="return getClientInfo()">
-            <input type="text" id="id" name="id" placeholder="ID клиента">
+            <input type="email" id="email" name="email" placeholder="Email клиента">
             <button type="submit">Получить статус клиента</button>
             <p><textarea id="infoClientStatus" name="newInfo" readonly></textarea></p>
         </form>
 
+
         <script>
         function getClientInfo() {
-            // Получаем ID клиента из поля ввода
-            var id = document.getElementById("id").value;
+            // Получаем email клиента из поля ввода
+            var email = document.getElementById("email").value;
 
             // Создаем объект XMLHttpRequest для выполнения запроса к серверу
             var xhr = new XMLHttpRequest();
@@ -202,8 +203,8 @@
                 }
             };
 
-            // Формируем URL для запроса к серверу, добавляем параметр id
-            var url = 'get_inf.php?id=' + encodeURIComponent(id);
+            // Формируем URL для запроса к серверу, добавляем параметр email
+            var url = 'get_inf.php?email=' + encodeURIComponent(email);
 
             // Открываем соединение и отправляем запрос к серверу
             xhr.open('GET', url, true);
@@ -212,17 +213,51 @@
             // Возвращаем false, чтобы предотвратить отправку формы
             return false;
         }
+
         </script>
         
         <h2>Получение информации о балансе клиента</h2>
-        <form id="getClientBalanceForm">
-            <input type="text" id="balanceClientId" name="balanceClientId" placeholder="ID клиента">
+        <form id="getClientBalanceForm" onsubmit="return getClientBalance()">
+            <input type="email" id="balanceClientEmail" name="balanceClientEmail" placeholder="Email клиента">
             <button type="submit">Получить баланс клиента</button>
             <p><textarea id="infoClientBalance" name="infoClientBalance" readonly></textarea></p>
         </form>
+
+
+        <script>
+        function getClientBalance() {
+            // Получаем email клиента из поля ввода
+            var email = document.getElementById("balanceClientEmail").value;
+
+            // Создаем объект XMLHttpRequest для выполнения запроса к серверу
+            var xhr = new XMLHttpRequest();
+
+            // Устанавливаем обработчик события загрузки
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    // Если запрос выполнен успешно, обновляем содержимое textarea
+                    document.getElementById("infoClientBalance").value = xhr.responseText;
+                } else {
+                    // Если возникла ошибка, выводим сообщение об ошибке
+                    alert('Request failed. Status: ' + xhr.status);
+                }
+            };
+
+            // Формируем URL для запроса к серверу, добавляем параметр email
+            var url = 'get_balance.php?email=' + encodeURIComponent(email);
+
+            // Открываем соединение и отправляем запрос к серверу
+            xhr.open('GET', url, true);
+            xhr.send();
+
+            // Возвращаем false, чтобы предотвратить отправку формы
+            return false;
+        }
+
+        </script>
         
         <h2>Автоматическое списание денежных средств</h2>
-        <form id="autoDebitForm">
+        <form id="autoDebitForm" action="debit.php" method="post">
             <input type="text" id="autoDebitClientId" name="autoDebitClientId" placeholder="ID клиента">
             <button type="submit">Списать деньги по расписанию</button>
         </form> 

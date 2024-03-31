@@ -1,5 +1,3 @@
-
-/*
 jQuery(document).ready(function($){
 	$('.hide-password').on('click', function(){
 		var $this= $(this),
@@ -9,4 +7,3 @@ jQuery(document).ready(function($){
 		( 'Скрыть' == $this.text() ) ? $this.text('Показать') : $this.text('Скрыть');
 	});
 });
-*/
