@@ -2,17 +2,37 @@
 error_reporting(E_ALL ^ E_NOTICE);
 include 'config.php';
 
-// Проверяем, был ли запрос на удаление клиента
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $sql_select_n_p_type = "SELECT n_p_type FROM clients WHERE email = '$email'";
-    $result = mysqli_query($connection, $sql_select_n_p_type);
-    $row = mysqli_fetch_assoc($result);
-    $n_p_type = $row['n_p_type'];
+    $email = $_POST['email']; // Получаем email клиента из формы
     
-    // Удаление записей по n_p_type
-    $sql_delete_n_p_type = "DELETE FROM clients WHERE n_p_type = '$n_p_type'";
-    mysqli_query($connection, $sql_delete_n_p_type);
+    if (isset($_POST['deletePayment'])) {
+        // Удаление последнего платежа
+        $sql_delete_payment = "DELETE FROM clients WHERE email = '$email' ORDER BY id DESC LIMIT 1";
+        mysqli_query($connection, $sql_delete_payment);
+    }
+    
+    if (isset($_POST['deleteExpense'])) {
+        // Удаление последнего расхода
+        $sql_delete_expense = "DELETE FROM clients WHERE email = '$email' ORDER BY id DESC LIMIT 1";
+        mysqli_query($connection, $sql_delete_expense);
+    }
+    
+    if (isset($_POST['addPayment'])) {
+        $paymentType = $_POST['clientPaymentNew'];
+        $amount = $_POST['addIngo'];
+        
+        // Добавление платежа
+        $sql_add_payment = "INSERT INTO clients (email, n_p_type, amount) VALUES ('$email', '$paymentType', '$amount')";
+        mysqli_query($connection, $sql_add_payment);
+    }
+    
+    if (isset($_POST['addExpense'])) {
+        $serviceType = $_POST['clientServiceNew'];
+        $amount = $_POST['addOutgo'];
+        
+        // Добавление расхода
+        $sql_add_expense = "INSERT INTO clients (email, n_service, amount) VALUES ('$email', '$serviceType', '$amount')";
+        mysqli_query($connection, $sql_add_expense);
+    }
 }
-
-$conn->close();
 ?>

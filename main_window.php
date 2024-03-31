@@ -124,13 +124,13 @@
         </form>
         
         <h2>Управление платежами и расходами</h2>
-        <form id="managePaymentsForm">
+        <form id="managePaymentsForm" action="deletepayment.php">
             <input type="text" id="clientIdPayment" name="clientIdPayment" placeholder="ID клиента">
             <p>
-                <button type="submit">Удалить последний платеж</button>
+                <button type="submit" name ="deletePayment">Удалить последний платеж</button>
             </p>
             <p>
-                <button type="submit">Удалить последний расход</button>
+                <button type="submit" name = "deleteExpense">Удалить последний расход</button>
             </p>
             <p>
                 <select name="clientPaymentNew" id="clientPaymentNew" >
@@ -145,7 +145,7 @@
                     <option value="clientPaymentNew8">СБП</option>
                 </select>
                 <input type="number" id="addIngo" name="addIngo" placeholder="Сумма платежа">
-                <button type="submit">Добавить платеж</button>
+                <button type="submit" name = "addPayment">Добавить платеж</button>
             </p>
             <p>
                 <select name="clientServiceNew" id="clientPaymentNew" >
@@ -160,7 +160,7 @@
                     <option value="clientServiceNew8">Услуга – Хостинг веб-ресурсов</option>
                 </select>
                 <input type="number" id="addOutgo" name="addOutgo" placeholder="Сумма расхода">
-                <button type="submit">Добавить расход</button>
+                <button type="submit" name ="addExpense">Добавить расход</button>
             </p>
         </form>
         
